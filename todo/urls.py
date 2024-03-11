@@ -1,15 +1,15 @@
 from django.urls import path
 
 from .views import (
-    TaskListView,
-    TaskCreateView,
-    TaskUpdateView,
-    TaskDeleteView,
-    TagListView,
     TagCreateView,
-    TagUpdateView,
     TagDeleteView,
+    TagListView,
+    TagUpdateView,
     TaskChangeStatusView,
+    TaskCreateView,
+    TaskDeleteView,
+    TaskListView,
+    TaskUpdateView,
 )
 
 urlpatterns = [

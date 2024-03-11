@@ -1,9 +1,11 @@
+import datetime
+
+from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls import reverse
-import datetime
-from todo.models import Tag, Task
+
 from todo.forms import TagForm, TaskForm
-from django.contrib.auth.models import User
+from todo.models import Tag, Task
 
 
 class ViewsTest(TestCase):
