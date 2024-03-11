@@ -2,18 +2,18 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <h1>{{ object|yesno:"Update,Create" }} Task</h1>
-
-  <div class="container">
-    <form method="post" enctype="multipart/form-data">
+    <h1 >{{ object|yesno:"Update,Create" }} Task</h1 >
+    
+    <div class = "container" >
+    <form method = "post" enctype = "multipart/form-data" >
       {% csrf_token %}
-      <div class="form-group">
+      <div class = "form-group" >
         {{ form|crispy }}
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">Submit</button>
-        <a class="btn btn-secondary" href="{% url 'todo:task-list' %}">Cancel</a>
-      </div>
-    </form>
-  </div>
+      </div >
+      <div class = "form-group" >
+        <button class = "btn btn-primary" type = "submit" >Submit</button >
+        <a class = "btn btn-secondary" href = "{% url 'todo:task-list' %}" >Cancel</a >
+      </div >
+    </form >
+  </div >
 {% endblock %}
