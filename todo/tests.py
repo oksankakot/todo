@@ -4,7 +4,6 @@ import datetime
 from todo.models import Tag, Task
 from todo.forms import TagForm, TaskForm
 from django.contrib.auth.models import User
-from django.contrib.admin.sites import AdminSite
 
 
 class ViewsTest(TestCase):
@@ -96,14 +95,16 @@ class ModelsTest(TestCase):
         self.assertEqual(tag.__str__(), tag.name)
 
     def test_task_creation(self):
-        task = Task.objects.create(content="Test Content", deadline="2024-03-10 12:00")
+        task = Task.objects.create(content="Test Content",
+                                   deadline="2024-03-10 12:00")
         self.assertTrue(isinstance(task, Task))
         self.assertEqual(task.__str__(), f"Content: {task.content}")
 
 
 class AdminTest(TestCase):
     def setUp(self):
-        self.admin = User.objects.create_superuser(username="admin", password="12345")
+        self.admin = User.objects.create_superuser(username="admin",
+                                                   password="12345")
         self.client = Client()
         self.client.login(username="admin", password="12345")
         self.tag = Tag.objects.create(name="Test Tag")

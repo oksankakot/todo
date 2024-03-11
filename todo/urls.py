@@ -21,7 +21,8 @@ urlpatterns = [
     path("tags/create", TagCreateView.as_view(), name="tag-create"),
     path("tags/<int:pk>/update", TagUpdateView.as_view(), name="tag-update"),
     path("tags/<int:pk>/delete", TagDeleteView.as_view(), name="tag-delete"),
-    path("chng_st/<int:pk>", TaskChangeStatusView.as_view(), name="task_change_status"),
+    path("chng_st/<int:pk>", TaskChangeStatusView.as_view(),
+         name="task_change_status"),
 ]
 
 app_name = "todo"
