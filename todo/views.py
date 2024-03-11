@@ -69,11 +69,11 @@ class TaskChangeStatusView(View):
         task.is_done = not task.is_done
         task.save()
 
-        return redirect(reverse_lazy('todo:task-list'))
+        return redirect(reverse_lazy("todo:task-list"))
 
     def get(self, request, pk):
         task = Task.objects.get(id=pk)
         task.is_done = not task.is_done
         task.save()
 
-        return redirect(reverse_lazy('todo:task-list'))
+        return redirect(reverse_lazy("todo:task-list"))
