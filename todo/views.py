@@ -11,14 +11,16 @@ class TaskListView(generic.ListView):
     context_object_name = "task_list"
     template_name = "todo/task_list.html"
     paginate_by = 6
-    queryset = Task.objects.prefetch_related("tags")
+
+    def get_queryset(self):
+        return Task.objects.prefetch_related("tags")
 
 
 class TaskCreateView(generic.CreateView):
     model = Task
     form_class = TaskForm
     template_name = "todo/task_form.html"
-    success_url = "http://127.0.0.1:8000/task/create"
+    success_url = reverse_lazy("todo:task-list")
 
 
 class TaskUpdateView(generic.UpdateView):
@@ -30,7 +32,6 @@ class TaskUpdateView(generic.UpdateView):
 
 class TaskDeleteView(generic.DeleteView):
     model = Task
-    fields = "__all__"
     template_name = "todo/task_confirm_delete.html"
     success_url = reverse_lazy("todo:task-list")
 
@@ -46,7 +47,7 @@ class TagCreateView(generic.CreateView):
     model = Tag
     form_class = TagForm
     template_name = "todo/tag_form.html"
-    success_url = "http://127.0.0.1:8000/tags/create"
+    success_url = reverse_lazy("todo:tag-list")
 
 
 class TagUpdateView(generic.UpdateView):
@@ -71,9 +72,3 @@ class TaskChangeStatusView(View):
 
         return redirect(reverse_lazy("todo:task-list"))
 
-    def get(self, request, pk):
-        task = Task.objects.get(id=pk)
-        task.is_done = not task.is_done
-        task.save()
-
-        return redirect(reverse_lazy("todo:task-list"))

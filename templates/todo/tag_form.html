@@ -2,34 +2,30 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-    <div class = "container" >
-        <div class = "row" >
-            <div class = "col-md-6 offset-md-3" >
-                <div class = "card mt-5" >
-                    <div class = "card-header" >
-                        <h1 class = "card-title" >{{ object|yesno:"Update,Create" }} Tag</h1 >
-                    </div >
-                    <div class = "card-body" >
-                        <form action = "" method = "post" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h1 class="card-title">{{ object|yesno:"Update,Create" }} Tag</h1>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post">
                             {% csrf_token %}
                             {{ form|crispy }}
-                            <div class = "form-group" >
-                                <button class = "btn btn-primary" type = "submit" >Submit</button >
-                            </div >
-                        </form >
-                    </div >
+                        </form>
+                    </div>
                     {% if object %}
-                        <div class = "card-footer" >
-                            <a href = "{% url 'todo:tag-update' pk=object.pk %}" class = "btn btn-info" >Update Tag</a >
-                            <form action = "{% url 'todo:tag-delete' pk=object.pk %}" method = "post"
-                                  class = "d-inline" >
+                        <div class="card-footer">
+                            <a href="{% url 'todo:tag-update' pk=object.pk %}" class="btn btn-info">Update Tag</a>
+                            <form action="{% url 'todo:tag-delete' pk=object.pk %}" method="post" class="d-inline">
                                 {% csrf_token %}
-                                <button class = "btn btn-danger" type = "submit" >Delete Tag</button >
-                            </form >
-                        </div >
+                                <button class="btn btn-danger" type="submit">Delete Tag</button>
+                            </form>
+                        </div>
                     {% endif %}
-                </div >
-            </div >
-        </div >
-    </div >
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
