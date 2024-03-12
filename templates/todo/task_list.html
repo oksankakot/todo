@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 >TODO list</h1 >
+    <a class = "btn btn-primary float-right mb-3" href = "{% url 'todo:task-create' %}" >Add task</a >
+    <br >
+    
+    <style >
+        .bg-light-success {
+            background-color: #d4edda; /* Light green */
+        }
+    </style >
+    
+    {% if task_list %}
+        <div class = "row" >
+            {% for task in task_list %}
+                <div class = "col-md-4" >
+                    <div
+                      class = "card mb-4 shadow-sm {% if task.is_done %}bg-light-success{% else %}bg-beige{% endif %}" >
+                        <div class = "card-body" >
+                            <h5 class = "card-title" >{{ task.content }}</h5 >
+                            {% if task.is_done %}
+                                <span class = "badge badge-success" >Done</span >
+                            {% else %}
+                                <span class = "badge badge-danger" >Not done</span >
+                            {% endif %}
+                            <p class = "card-text" >Created: {{ task.created_at }}</p >
+                            {% if task.deadline %}
+                                <p class = "card-text" >Deadline: {{ task.deadline }}</p >
+                            {% endif %}
+                            <p class = "card-text" >Tags:
+                                {% for tag in task.tags.all %}
+                                    <span class = "badge badge-info" >{{ tag.name }}</span >
+                                {% endfor %}
+                            </p >
+                            <div class = "btn-group" role = "group" >
+                                <a href = "{% url 'todo:task-update' pk=task.id %}" class = "btn btn-sm btn-primary" >Update</a >
+                                <a href = "{% url 'todo:task-delete' pk=task.id %}" class = "btn btn-sm btn-danger" >Delete</a >
+                            </div >
+                        </div >
+                    </div >
+                </div >
+            {% endfor %}
+        </div >
+    {% else %}
+        <p >There are no todos</p >
+    {% endif %}
+{% endblock %}
